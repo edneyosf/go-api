@@ -1,4 +1,4 @@
-# Golang base API
+# Goapi
 Base structure for creating an API with Golang using Gorm, Echo and Docker.
 
 ---

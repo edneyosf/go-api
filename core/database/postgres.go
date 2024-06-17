@@ -7,7 +7,7 @@ import (
 )
 
 func NewPostgres() (*gorm.DB, error) {
-	if !checkEnvironmentVariables() { return nil, errors.New(noEnvironmentVariablesError) }
+	if !loadEnvironmentVariables() { return nil, errors.New(noEnvironmentVariablesError) }
 
 	dsn := postgresDsn()
 	dialector := postgres.Open(dsn)

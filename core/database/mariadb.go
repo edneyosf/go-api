@@ -7,7 +7,7 @@ import (
 )
 
 func NewMariaDB() (*gorm.DB, error) {
-	if !checkEnvironmentVariables() { return nil, errors.New(noEnvironmentVariablesError) }
+	if !loadEnvironmentVariables() { return nil, errors.New(noEnvironmentVariablesError) }
 
 	dsn := mariaDbDsn()
 	dialector := mysql.Open(dsn)

@@ -1,4 +1,4 @@
-# Base API
+# Golang base API
 Base structure for creating an API with Golang using Gorm and Echo
 
 ---

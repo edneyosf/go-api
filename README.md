@@ -1,33 +1,51 @@
-## core
-
-Esta pasta é onde você coloca o código interno do aplicativo. Ele contém a lógica de negócios, como controladores, casos de uso, repositórios e entidades. A ideia por trás desta pasta é que o código aqui não seja acessível fora do pacote (módulo), o que ajuda a manter a encapsulação e a modularidade.
-
-## api
-
-Esta pasta pode conter tudo relacionado à interface da API, como definições de rotas, manipuladores de requisições HTTP e documentação da API. Ela fornece uma separação clara entre a lógica do aplicativo e a interface de comunicação com o mundo exterior.
-
-## pkg
-
-Esta pasta contém pacotes ou bibliotecas reutilizáveis que podem ser usados em diferentes partes do aplicativo ou até mesmo em outros projetos. Por exemplo, pode conter utilitários genéricos, funções de configuração, manipuladores de erros, entre outros.
+# Base API
+Base structure for creating an API with Golang using Gorm and Echo
 
 ---
 
-#### app
+## core
+This folder is where you place the internal code of the application. It contains business logic such as controllers, use cases, repositories, and entities. The idea behind this folder is that the code here is not accessible outside the package (module), which helps to maintain encapsulation and modularity.
 
-Esta pasta é onde você coloca a lógica de aplicativo específica, como controladores, casos de uso, repositórios e entidades. Ela contém a maior parte da lógica de negócios do aplicativo.
+## api
+This folder can contain everything related to the API interface, such as route definitions, HTTP request handlers, and API documentation. It provides a clear separation between the application logic and the interface for communication with the outside world.
+
+## pkg
+This folder contains reusable packages or libraries that can be used in different parts of the application or even in other projects. For example, it might contain generic utilities, configuration functions, error handlers, among others.
+
+---
+
+#### middleware
+Contains middlewares that intercept and process requests before reaching the controllers.
+
+#### route
+Contains the application's route definitions, mapping URLs to request handlers.
+
+#### app
+This folder is where you place the application-specific logic, such as controllers, use cases, repositories, and entities. It contains most of the application's business logic.
 
 #### controller
-
-Aqui você coloca os controladores HTTP que recebem as requisições do cliente, chamam os casos de uso apropriados e retornam as respostas HTTP.
+Here you place the HTTP controllers that receive client requests, call the appropriate use cases, and return the HTTP responses.
 
 #### usecase
-
-Esta pasta contém os casos de uso do aplicativo, que contêm a lógica de negócios específica do aplicativo. Os casos de uso orquestram as operações de negócios e interagem com os repositórios para acessar os dados.
+This folder contains the application's use cases, which contain the application's specific business logic. The use cases orchestrate business operations and interact with repositories to access data.
 
 #### repository
-
-Os repositórios são responsáveis por interagir com a camada de armazenamento de dados (banco de dados, cache, etc.). Eles encapsulam a lógica de acesso aos dados e fornecem métodos para recuperar, criar, atualizar e excluir entidades.
+Repositories are responsible for interacting with the data storage layer (database, cache, etc.). They encapsulate the data access logic and provide methods to retrieve, create, update, and delete entities.
 
 #### entity
+This folder contains the application's entity definitions, which represent the main domain objects the application works with. Entities are often mapped directly to database tables.
 
-Esta pasta contém as definições de entidade do aplicativo, que representam os objetos de domínio principais com os quais o aplicativo trabalha. As entidades são frequentemente mapeadas diretamente para tabelas de banco de dados.
+#### message
+Contains the messages to be used in request responses.
+
+#### data (request/response)
+Contains the data structures to be used as responses or received in requests.
+
+#### database
+Related to database connections and configurations.
+
+#### server
+Related to the HTTP/HTTPS server and its configurations.
+
+#### config
+Settings to be used in the application

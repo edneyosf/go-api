@@ -48,4 +48,4 @@ Related to database connections and configurations.
 Related to the HTTP/HTTPS server and its configurations.
 
 #### config
-Settings to be used in the application
+Settings to be used in the application.

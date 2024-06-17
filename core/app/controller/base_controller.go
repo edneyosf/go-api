@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"base-api/core/app/data/request"
+	"base-api/core/app/message"
 	"net/http"
 	"strconv"
 
@@ -8,52 +10,62 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (c *baseController) CreateBase(ctx echo.Context) error {
-	var base struct {
-		Name string `json:"name"`
-	}
-	if err := ctx.Bind(&base); err != nil {
-		return ctx.JSON(http.StatusBadRequest, map[string]string{"error": err.Error()})
-	}
+func (controller *baseController) CreateBase(ctx echo.Context) error {
+	var base request.BaseData
 
-	err := c.baseUsecase.CreateBase(base.Name)
+	err := ctx.Bind(&base)
+
 	if err != nil {
-		return ctx.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		response := errorResponse(message.FailureToBindData)
+
+		return ctx.JSON(http.StatusBadRequest, response)
 	}
 
-	return ctx.JSON(http.StatusCreated, nil)
+	err = controller.baseUsecase.CreateBase(base)
+
+	if err != nil {
+		response := errorResponse(err.Error())
+
+		return ctx.JSON(http.StatusInternalServerError, response)
+	}
+
+	return ctx.NoContent(http.StatusCreated)
 }
 
-func (c *baseController) GetBaseById(ctx echo.Context) error {
-	idParam := ctx.QueryParam("id")
+func (controller *baseController) GetBaseById(ctx echo.Context) error {
+	idParam := ctx.Param("id")
 	id, err := strconv.ParseInt(idParam, 10, 64)
 
 	if err != nil {
-		return ctx.JSON(http.StatusBadRequest, map[string]string{"error": "invalid user ID"})
+		response := errorResponse(message.FailureToBindData)
+
+		return ctx.JSON(http.StatusBadRequest, response)
 	}
 
-	user, err := c.baseUsecase.GetBaseById(id)
+	base, err := controller.baseUsecase.GetBaseById(id)
 
 	if err != nil {
-		return ctx.JSON(http.StatusNotFound, map[string]string{"error": err.Error()})
+		response := errorResponse(err.Error())
+
+		return ctx.JSON(http.StatusNotFound, response)
 	}
 
-	return ctx.JSON(http.StatusOK, user)
+	return ctx.JSON(http.StatusOK, base)
 }
 
-func (c *baseController) ListBases(ctx echo.Context) error {
+func (controller *baseController) ListBases(ctx echo.Context) error {
+	var response interface{}
 	statusCode := http.StatusOK
-	var data interface{}
-	users, err := c.baseUsecase.ListBases()
+	bases, err := controller.baseUsecase.ListBases()
 
 	if err != nil {
 		statusCode = http.StatusInternalServerError
-		data = map[string]string{"error": err.Error()}
+		response = errorResponse(err.Error())
 	} else{
-		data = users
+		response = bases
 	}
 
-	return ctx.JSON(statusCode, data)
+	return ctx.JSON(statusCode, response)
 }
 
 func NewController(baseUsecase usecase.BaseUsecase) BaseController {

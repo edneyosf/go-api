@@ -1,4 +1,4 @@
-package routes
+package route
 
 import (
 	"base-api/core/app/controller"
@@ -9,14 +9,14 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func setupBase(e *echo.Echo, db *gorm.DB) {
+func addBase(e *echo.Echo, db *gorm.DB) {
 	baseRepo := repository.NewBaseRepository(db)
 	baseUsecase := usecase.NewBaseUsecase(baseRepo)
 	baseController := controller.NewController(baseUsecase)
 
 	e.POST(bases, baseController.CreateBase)
 	e.GET(bases, baseController.ListBases)
-	e.GET(bases+ "/:id", baseController.GetBaseById)
+	e.GET(bases + "/:id", baseController.GetBaseById)
 }
 
 

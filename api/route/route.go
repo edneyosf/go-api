@@ -1,4 +1,4 @@
-package routes
+package route
 
 import (
 	"github.com/labstack/echo/v4"
@@ -13,5 +13,5 @@ func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	setupBase(e, db)
+	addBase(e, db)
 }

@@ -1,12 +1,13 @@
 package usecase
 
 import (
+	"base-api/core/app/data/request"
 	"base-api/core/app/entity"
 	"base-api/core/app/repository"
 )
 
-func (useCase *baseUsecase) CreateBase(name string) error {
-	base := &entity.Base{Name: name}
+func (useCase *baseUsecase) CreateBase(data request.BaseData) error {
+	base := &entity.Base{Name: data.Name}
 
 	return useCase.baseRepo.CreateBase(base)
 }
@@ -26,7 +27,7 @@ func NewBaseUsecase(baseRepo repository.BaseRepository) BaseUsecase {
 type baseUsecase struct { baseRepo repository.BaseRepository }
 
 type BaseUsecase interface {
-	CreateBase(name string) error
+	CreateBase(data request.BaseData) error
 	GetBaseById(id int64) (*entity.Base, error)
 	ListBases() ([]*entity.Base, error)
 }

@@ -13,7 +13,7 @@ func (repository *baseRepository) CreateBase(base *entity.Base) error {
 
 func (repository *baseRepository) GetBaseById(id int64) (*entity.Base, error) {
 	var base *entity.Base
-	result := repository.db.First(base, id)
+	result := repository.db.First(&base, id)
 
 	return base, result.Error
 }

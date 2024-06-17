@@ -1,7 +1,7 @@
 package main
 
 import (
-	"base-api/api/routes"
+	"base-api/api/route"
 	"base-api/core/app/entity"
 	"base-api/core/database"
 	"base-api/core/server"
@@ -40,9 +40,9 @@ func initDatabase() bool {
 func startServer() {
 	e = server.New()
 
-	routes.SetupRoutes(e, db)
+	route.SetupRoutes(e, db)
 
-	log.I("Starting API server on port " + config.Port)
+	log.I("Starting API v" + config.Version + " on port " + config.Port)
 	err := e.Start(":" + config.Port)
 
 	if err != nil {

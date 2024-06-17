@@ -1,6 +1,4 @@
-cmd: Esta pasta geralmente contém o código de entrada principal (main) para o aplicativo. É onde você inicia a execução do programa. No caso de uma aplicação web, como uma API, o arquivo main.go dentro desta pasta será responsável por configurar o servidor HTTP e iniciar o roteamento.
-
-internal: Esta pasta é onde você coloca o código interno do aplicativo. Ele contém a lógica de negócios, como controladores, casos de uso, repositórios e entidades. A ideia por trás desta pasta é que o código aqui não seja acessível fora do pacote (módulo), o que ajuda a manter a encapsulação e a modularidade.
+core: Esta pasta é onde você coloca o código interno do aplicativo. Ele contém a lógica de negócios, como controladores, casos de uso, repositórios e entidades. A ideia por trás desta pasta é que o código aqui não seja acessível fora do pacote (módulo), o que ajuda a manter a encapsulação e a modularidade.
 
 api: Esta pasta pode conter tudo relacionado à interface da API, como definições de rotas, manipuladores de requisições HTTP e documentação da API. Ela fornece uma separação clara entre a lógica do aplicativo e a interface de comunicação com o mundo exterior.
 

@@ -4,15 +4,15 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - DB_HOST=db
+      - DB_HOST=postgres
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=123
       - DB_NAME=postgres
     depends_on:
-      - db
+      - postgres
 
-  db:
+  postgres:
     image: postgres:16-alpine
     ports:
       - "5432:5432"
@@ -20,3 +20,10 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
+
+  mariadb:
+    image: mariadb:lts
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: 123

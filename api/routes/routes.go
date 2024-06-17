@@ -1,18 +1,17 @@
 package routes
 
 import (
-	"base-api/internal/app/controller"
-
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"gorm.io/gorm"
 )
 
-func SetupRoutes(e *echo.Echo, userController *controller.BaseController) {
+const bases = "/bases"
+
+func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.POST("/users", userController.Create)
-	e.GET("/users", userController.List)
-	e.GET("/users/:id", userController.GetById)
+	setupBase(e, db)
 }

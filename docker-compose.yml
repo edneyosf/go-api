@@ -3,12 +3,8 @@ services:
     build: .
     ports:
       - "5000:5000"
-    environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=123
-      - DB_NAME=postgres
+    env_file:
+      - .env
     depends_on:
       - postgres
 

@@ -6,7 +6,9 @@ import (
 	"base-api/core/database"
 	"base-api/core/server"
 	"base-api/pkg/config"
+	"fmt"
 	log "github.com/edneyosf/gloged"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
@@ -15,10 +17,21 @@ var db *gorm.DB
 var e *echo.Echo
 
 func main() {
+	loadEnv()
 	dbAvailable := initDatabase()
 
 	if dbAvailable {
 		startServer()
+	}
+}
+
+func loadEnv() {
+	err := godotenv.Load()
+
+	if err != nil {
+		msg := fmt.Sprintf("Error loading .env file: %v", err)
+
+		log.E(msg)
 	}
 }
 

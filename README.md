@@ -1,6 +1,8 @@
 # Goapi
 Base structure for creating an API with Golang using Gorm, Echo, Docker, PostgreSQL and MariaDB.
 
+[![Version](https://img.shields.io/badge/version-v1.0.0-success)]()
+
 ---
 
 ## core
